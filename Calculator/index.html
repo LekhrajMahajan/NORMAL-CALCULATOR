@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator</title>
+    <style>
+        .calculator {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #result {
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: right;
+            font-size: 18px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .operator {
+            background-color: #eee;
+        }
+
+        .clear {
+            background-color: #f00;
+            color: #fff;
+        }
+
+        .equals {
+            background-color: #00f;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" id="result" readonly>
+        <div class="buttons">
+            <button class="operator" value="/">/</button>
+            <button class="operator" value="*">*</button>
+            <button class="operator" value="-">-</button>
+            <button class="operator" value="+">+</button>
+            <button value="7">7</button>
+            <button value="8">8</button>
+            <button value="9">9</button>
+            <button value="4">4</button>
+            <button value="5">5</button>
+            <button value="6">6</button>
+            <button value="1">1</button>
+            <button value="2">2</button>
+            <button value="3">3</button>
+            <button class="clear" value="C">C</button>
+            <button value="0">0</button>
+            <button class="equals" value="=">=</button>
+        </div>
+    </div>
+    <script>
+        const result = document.getElementById("result");
+        const buttons = document.querySelectorAll(".buttons button");
+
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                if (button.classList.contains("operator")) {
+                    result.value += button.value;
+                } else if (button.classList.contains("clear")) {
+                    result.value = "";
+                } else if (button.classList.contains("equals")) {
+                    try {
+                        result.value = eval(result.value);
+                    } catch {
+                        result.value = "Error";
+                    }
+                } else {
+                    result.value += button.value;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
